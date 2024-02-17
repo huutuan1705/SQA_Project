@@ -3,9 +3,11 @@ package com.example.server_register.repository;
 import com.example.server_register.model.SemesterSchoolYear;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface SemesterSchoolYearRepo {
 
     //CREATE DEFINER=`root`@`localhost` PROCEDURE `semesterRegistered`()
@@ -16,7 +18,7 @@ public interface SemesterSchoolYearRepo {
     //    WHERE c.idnamhoc = a.id AND c.idhocki = b.id AND c.dangdk = 1;
     //END
     @Procedure("semesterRegistered")
-    public SemesterSchoolYear getSemesterRegister();
+    public List<SemesterSchoolYear> getSemesterRegister();
 
 
     //CREATE DEFINER=`root`@`localhost` PROCEDURE `presentSemester`()
@@ -27,7 +29,7 @@ public interface SemesterSchoolYearRepo {
     //    WHERE c.idnamhoc = a.id AND c.idhocki = b.id AND c.danghoc = 1;
     //END
     @Procedure("presentSemester")
-    public SemesterSchoolYear getPresentSemesterSchoolYear();
+    public List<SemesterSchoolYear> getPresentSemesterSchoolYear();
 
     //CREATE DEFINER=`root`@`localhost` PROCEDURE `allSemester`()
     //BEGIN

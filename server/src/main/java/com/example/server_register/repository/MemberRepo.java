@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepo extends JpaRepository<Member, Integer> {
 
-    //CREATE DEFINER=`root`@`localhost` PROCEDURE `checkAccount`(IN usr VARCHAR(255), IN pwd VARCHAR(255))
-    //BEGIN
-    //    SELECT * FROM tblthanhvien
-    //    WHERE username = usr AND password = pwd;
-    //END
+//    CREATE DEFINER=`root`@`localhost` PROCEDURE `checkAccount`(IN usr VARCHAR(255), IN pwd VARCHAR(255))
+//    BEGIN
+//        SELECT * FROM tblthanhvien
+//        WHERE username = usr AND password = pwd;
+//    END
     @Procedure(value = "checkAccount")
-    public boolean getAccount(Member member);
+    public boolean checkAccount(Member member);
 
 
 }
