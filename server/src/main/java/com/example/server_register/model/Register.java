@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "dangkihoc")
+@Table(name = "tbldangkihoc")
 @Entity
 public class Register {
     @Id

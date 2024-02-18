@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "kip")
+@Table(name = "tblkip")
 @Entity
 public class SchoolShift {
     @Id
