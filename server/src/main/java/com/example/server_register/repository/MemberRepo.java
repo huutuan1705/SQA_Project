@@ -1,22 +1,28 @@
 package com.example.server_register.repository;
 
+
 import com.example.server_register.model.Member;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.query.Param;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MemberRepo extends JpaRepository<Member, Integer> {
+@RequiredArgsConstructor
+public class MemberRepo {
 
-//    CREATE DEFINER=`root`@`localhost` PROCEDURE `checkAccount`(IN usr VARCHAR(255), IN pwd VARCHAR(255))
-//    BEGIN
-//        SELECT * FROM tblthanhvien
-//        WHERE username = usr AND password = pwd;
-//    END
-    @Procedure(value = "checkAccount")
-    public boolean checkAccount(Member member);
+    private final EntityManager entityManager;
 
+    public Member checkAccount(Member member){
 
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("checkAccount", "MemberMapper")
+                .registerStoredProcedureParameter("usr", String.class, ParameterMode.IN)
+                .setParameter("usr", "b20dccn352")
+                .registerStoredProcedureParameter("pwd", String.class, ParameterMode.IN)
+                .setParameter("pwd", "123456");
+
+        return (Member) query.getSingleResult();
+    }
 }

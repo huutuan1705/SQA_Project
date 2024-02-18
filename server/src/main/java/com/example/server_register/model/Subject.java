@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "monhoc")
+@Table(name = "tblmonhoc")
 @Entity
 public class Subject {
     @Id

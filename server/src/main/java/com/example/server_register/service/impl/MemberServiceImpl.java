@@ -1,5 +1,6 @@
 package com.example.server_register.service.impl;
 
+import com.example.server_register.dto.MemberDto;
 import com.example.server_register.model.Member;
 import com.example.server_register.repository.MemberRepo;
 import com.example.server_register.service.MemberService;
@@ -13,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepo memberRepo;
 
     @Override
-    public boolean checkLogin(Member member) {
+    public Member checkLogin(Member member) {
         return memberRepo.checkAccount(member);
     }
 }

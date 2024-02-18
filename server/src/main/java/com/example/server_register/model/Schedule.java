@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "lichhoc")
+@Table(name = "tbllichhoc")
 @Entity
 public class Schedule {
     @Id

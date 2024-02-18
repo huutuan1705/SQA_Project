@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "lophocphan")
+@Table(name = "tbllophocphan")
 @Entity
 public class SectionClass {
     @Id

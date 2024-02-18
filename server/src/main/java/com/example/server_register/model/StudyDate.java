@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "ngay")
+@Table(name = "tblngay")
 @Entity
 public class StudyDate {
     @Id
