@@ -55,4 +55,9 @@ public class Member {
         this.des= des;
         this.role = role;
     }
+
+    public Member(Integer idStudent, String studentName) {
+        this.id = idStudent;
+        this.name = studentName;
+    }
 }

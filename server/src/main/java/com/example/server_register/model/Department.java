@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "tblkhoa")
 @Entity
+@NoArgsConstructor
 public class Department {
     @Id
     private Integer id;
@@ -19,4 +21,9 @@ public class Department {
     private String des;
     @Transient
     private Subject subjectList;
+
+    public Department(Integer idDepartment, String departmentName) {
+        this.id = idDepartment;
+        this.name = departmentName;
+    }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @Table(name = "tblmonhoc")
 @Entity
+@NoArgsConstructor
 public class Subject {
     @Id
     private Integer id;
@@ -25,4 +27,10 @@ public class Subject {
     //mon tien quyet
     @Transient
     private List<Subject> prerequisiteSubject;
+
+    public Subject(Integer idSubject, String subjectName, Integer credit) {
+        this.id = idSubject;
+        this.name = subjectName;
+        this.credit = credit;
+    }
 }

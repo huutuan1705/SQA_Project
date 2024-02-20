@@ -1,17 +1,27 @@
 package com.example.server_register.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@Table(name = "tblsinhvienkhoa")
 @Entity
+@SqlResultSetMapping(
+        name = "StudentDepartmentMapper",
+        classes = @ConstructorResult(
+                targetClass = StudentDepartment.class,
+                columns = {
+                        @ColumnResult(name = "idkhoa", type = Integer.class),
+                        @ColumnResult(name = "tenkhoa", type = String.class),
+                        @ColumnResult(name = "idsvk", type = Integer.class),
+                        @ColumnResult(name = "ma_sinh_vien", type = String.class),
+                        @ColumnResult(name = "id", type = Integer.class),
+                        @ColumnResult(name = "ten", type = String.class)
+                }
+        )
+)
 public class StudentDepartment {
     @Id
     private Integer id;
@@ -22,4 +32,14 @@ public class StudentDepartment {
     @Transient
     private Department department;
     private Boolean active;
+
+    public StudentDepartment(Integer idDepartment, String departmentName, Integer idStudentDepartment, String studentCode, Integer idStudent, String studentName) {
+        this.id = idStudentDepartment;
+        this.department = new Department(idDepartment, departmentName);
+        this.student = new Student(studentCode, idStudent, studentName);
+    }
+
+    public StudentDepartment() {
+
+    }
 }

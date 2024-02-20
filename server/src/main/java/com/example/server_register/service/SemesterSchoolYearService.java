@@ -7,9 +7,5 @@ import java.util.List;
 public interface SemesterSchoolYearService {
 
     List<SemesterSchoolYear> getSemesterSchoolYear();
-
-    List<SemesterSchoolYear> getPresentSemester();
-
-    List<SemesterSchoolYear> getAllSemester();
 }
 
