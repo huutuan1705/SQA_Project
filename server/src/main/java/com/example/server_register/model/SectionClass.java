@@ -1,9 +1,6 @@
 package com.example.server_register.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +8,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "tbllophocphan")
 @Entity
 public class SectionClass {
     @Id
@@ -24,4 +20,6 @@ public class SectionClass {
     private SubjectSemester subjectSemester;
     @Transient
     private List<Schedule> scheduleList;
+
+
 }

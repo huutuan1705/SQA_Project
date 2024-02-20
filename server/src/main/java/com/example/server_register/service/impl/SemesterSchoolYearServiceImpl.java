@@ -8,23 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//@Service
-//@RequiredArgsConstructor
-//public class SemesterSchoolYearServiceImpl implements SemesterSchoolYearService {
-//
-//    private final SemesterSchoolYearRepo semesterSchoolYearRepo;
-//    @Override
-//    public List<SemesterSchoolYear> getSemesterSchoolYear() {
-//        return semesterSchoolYearRepo.getSemesterRegister();
-//    }
-//
-//    @Override
-//    public List<SemesterSchoolYear> getPresentSemester() {
-//        return semesterSchoolYearRepo.getPresentSemesterSchoolYear();
-//    }
-//
-//    @Override
-//    public List<SemesterSchoolYear> getAllSemester() {
-//        return semesterSchoolYearRepo.getAllSemesterSchoolYear();
-//    }
-//}
+@Service
+@RequiredArgsConstructor
+public class SemesterSchoolYearServiceImpl implements SemesterSchoolYearService {
+
+    private final SemesterSchoolYearRepo semesterSchoolYearRepo;
+    @Override
+    public List<SemesterSchoolYear> getSemesterSchoolYear() {
+        return semesterSchoolYearRepo.getSemesterRegister();
+    }
+}

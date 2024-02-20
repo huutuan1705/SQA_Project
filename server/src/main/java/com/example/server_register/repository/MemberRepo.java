@@ -19,9 +19,9 @@ public class MemberRepo {
 
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("checkAccount", "MemberMapper")
                 .registerStoredProcedureParameter("usr", String.class, ParameterMode.IN)
-                .setParameter("usr", "b20dccn352")
+                .setParameter("usr", member.getUsername())
                 .registerStoredProcedureParameter("pwd", String.class, ParameterMode.IN)
-                .setParameter("pwd", "123456");
+                .setParameter("pwd", member.getPassword());
 
         return (Member) query.getSingleResult();
     }

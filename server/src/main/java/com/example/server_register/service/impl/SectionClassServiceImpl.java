@@ -12,15 +12,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SectionClassServiceImpl implements SectionClassService {
 
-    private final SectionClassRepo sectionClassRepo;
+//    private final SectionClassRepo sectionClassRepo;
 
     @Override
     public List<SectionClass> getSectionClassForStudentRegister(Integer idStudent, Integer idSubjectSemester) {
-        return sectionClassRepo.getSectionClassForStudent(idStudent, idSubjectSemester);
+//        return sectionClassRepo.getSectionClassForStudent(idStudent, idSubjectSemester);
+        return  null;
     }
 
     @Override
     public List<SectionClass> getSectionClassForTeacher(Integer idTeacher, Integer idSubjectSemester) {
-        return sectionClassRepo.getSectionClassForTeacher(idTeacher, idSubjectSemester);
+//        return sectionClassRepo.getSectionClassForTeacher(idTeacher, idSubjectSemester);
+        return null;
     }
 }

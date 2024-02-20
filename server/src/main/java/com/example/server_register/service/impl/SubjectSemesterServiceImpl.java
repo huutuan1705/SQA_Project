@@ -15,14 +15,7 @@ public class SubjectSemesterServiceImpl implements SubjectSemesterService {
     private final SubjectSemesterRepo subjectSemesterRepo;
 
     @Override
-    public List<SubjectSemester> getSubjectOfStudent(Integer idStudent, Integer idSemester) {
-        return subjectSemesterRepo.getSubjectOfStudent(idStudent, idSemester);
+    public List<SubjectSemester> getSubjectOfStudent(Integer idStudent, Integer idSemesterSchoolYear) {
+        return subjectSemesterRepo.getSubjectSemesterForStudent(idStudent, idSemesterSchoolYear);
     }
-
-    @Override
-    public List<SubjectSemester> getSubjectOfTeacher(Integer idTeacher, Integer idSemester) {
-        return subjectSemesterRepo.getSubjectOfTeacher(idTeacher, idSemester);
-    }
-
-
 }
