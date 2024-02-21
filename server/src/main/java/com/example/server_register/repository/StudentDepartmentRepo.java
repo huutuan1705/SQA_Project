@@ -28,8 +28,8 @@ public class StudentDepartmentRepo {
         List<?> resultList = query.getResultList();
         List<StudentDepartment> studentDepartments = new ArrayList<>();
         for(Object object : resultList){
-            if(object instanceof StudentDepartment){
-                studentDepartments.add((StudentDepartment) object);
+            if(object instanceof StudentDepartment studentDepartment){
+                studentDepartments.add(studentDepartment);
             }
         }
         return studentDepartments;

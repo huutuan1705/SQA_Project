@@ -1,16 +1,19 @@
 package com.example.server_register.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Getter
 @Setter
-@Table(name = "tblphonghoc")
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 public class Room {
     @Id
@@ -20,4 +23,9 @@ public class Room {
     private String des;
     @Transient
     private Building building;
+
+    public Room(Integer idRoom, String roomName) {
+        this.id = idRoom;
+        this.name = roomName;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.server_register.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,8 +10,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "tblnamhoc")
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 public class SchoolYear {
     @Id

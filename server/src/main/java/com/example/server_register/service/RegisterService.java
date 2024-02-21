@@ -8,4 +8,8 @@ import java.util.List;
 public interface RegisterService {
 
     List<Register> getRegisterOfStudent(Integer idStudentDepartment, Integer idSemesterSchoolYear);
+
+    boolean deleteOneRegistration(Integer idStudentDepartment, Integer idSectionClass);
+
+    boolean insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass);
 }

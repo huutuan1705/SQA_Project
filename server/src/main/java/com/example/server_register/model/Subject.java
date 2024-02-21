@@ -1,5 +1,6 @@
 package com.example.server_register.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -12,9 +13,9 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name = "tblmonhoc")
 @Entity
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Subject {
     @Id
     private Integer id;

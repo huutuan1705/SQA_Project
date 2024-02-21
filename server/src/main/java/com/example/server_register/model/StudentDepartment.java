@@ -1,5 +1,6 @@
 package com.example.server_register.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @SqlResultSetMapping(
         name = "StudentDepartmentMapper",
         classes = @ConstructorResult(
@@ -41,5 +43,12 @@ public class StudentDepartment {
 
     public StudentDepartment() {
 
+    }
+
+    public StudentDepartment(Integer idDepartment, Integer idStudentDepartment, String studentCode, Integer idStudent, String studentName, String schoolYear) {
+        this.id = idStudentDepartment;
+        this.schoolYear = schoolYear;
+        this.student = new Student(studentCode, idStudent, studentName);
+        this.department = new Department(idDepartment);
     }
 }

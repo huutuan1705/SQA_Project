@@ -36,7 +36,6 @@ public class SubjectSemesterRepo {
             if(object instanceof SubjectSemester subjectSemester){
                 subjectSemester.setSemesterSchoolYear(new SemesterSchoolYear(idSemesterSchoolYear));
                 subjectSemesters.add(subjectSemester);
-
             }
         }
         return  subjectSemesters;
