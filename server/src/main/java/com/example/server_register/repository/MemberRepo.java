@@ -22,7 +22,6 @@ public class MemberRepo {
                 .setParameter("usr", member.getUsername())
                 .registerStoredProcedureParameter("pwd", String.class, ParameterMode.IN)
                 .setParameter("pwd", member.getPassword());
-
         return (Member) query.getSingleResult();
     }
 }

@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface SectionClassService {
 
-    List<SectionClass> getSectionClassForStudentRegister(Integer idStudent,
+    List<SectionClass> getSectionClassForStudentRegister(Integer idStudentDepartment,
                                                          Integer idSubjectSemester);
-
-    List<SectionClass> getSectionClassForTeacher(Integer idTeacher,
-                                                 Integer idSubjectSemester);
 }

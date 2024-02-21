@@ -11,7 +11,6 @@ import java.util.List;
 
 @Setter
 @Getter
-@Table(name = "tblbomon")
 @Entity
 // bo mon
 public class Genre {

@@ -1,5 +1,6 @@
 package com.example.server_register.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @SqlResultSetMapping(
         name = "SemesterSchoolYearMapper",
         classes = @ConstructorResult(

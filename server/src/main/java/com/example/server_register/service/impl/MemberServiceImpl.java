@@ -1,6 +1,5 @@
 package com.example.server_register.service.impl;
 
-import com.example.server_register.dto.MemberDto;
 import com.example.server_register.model.Member;
 import com.example.server_register.repository.MemberRepo;
 import com.example.server_register.service.MemberService;

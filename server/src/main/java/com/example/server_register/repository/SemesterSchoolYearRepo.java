@@ -22,8 +22,8 @@ public class SemesterSchoolYearRepo {
         List<?> activeRegisterSemesters = query.getResultList();
         List<SemesterSchoolYear> semesterSchoolYears = new ArrayList<>();
         for (Object object : activeRegisterSemesters){
-            if(object instanceof SemesterSchoolYear){
-                semesterSchoolYears.add((SemesterSchoolYear) object);
+            if(object instanceof SemesterSchoolYear semesterSchoolYear){
+                semesterSchoolYears.add(semesterSchoolYear);
             }
         }
         return semesterSchoolYears;

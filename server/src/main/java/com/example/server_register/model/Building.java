@@ -12,7 +12,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "tbltoanha")
 public class Building {
     @Id
     private Integer id;

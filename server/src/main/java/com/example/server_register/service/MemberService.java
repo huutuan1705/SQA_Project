@@ -1,6 +1,5 @@
 package com.example.server_register.service;
 
-import com.example.server_register.dto.MemberDto;
 import com.example.server_register.model.Member;
 
 public interface MemberService {
