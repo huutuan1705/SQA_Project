@@ -22,6 +22,10 @@ public class SectionClassRepo {
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idMHKH", Integer.class, ParameterMode.IN)
                 .setParameter("idMHKH", idSubjectSemester);
+        return getSectionClassesFromQuery(query);
+    }
+
+    private static List<SectionClass> getSectionClassesFromQuery(StoredProcedureQuery query) {
         List<?> objects = query.getResultList();
         List<SectionClass> sectionClasses = new ArrayList<>();
         for(Object object : objects){

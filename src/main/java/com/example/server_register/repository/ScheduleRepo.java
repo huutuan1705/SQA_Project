@@ -21,6 +21,10 @@ public class ScheduleRepo {
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                 .setParameter("idLHP", idSectionClass);
 
+        return getSchedulesFromQuery(query);
+    }
+
+    private static List<Schedule> getSchedulesFromQuery(StoredProcedureQuery query) {
         List<?> objects = query.getResultList();
         List<Schedule> schedules = new ArrayList<>();
         for (Object object : objects) {

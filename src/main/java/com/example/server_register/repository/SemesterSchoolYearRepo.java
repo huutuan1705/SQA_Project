@@ -19,6 +19,10 @@ public class SemesterSchoolYearRepo {
 
     public List<SemesterSchoolYear> getSemesterRegister(){
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("activeRegisterSemester", "SemesterSchoolYearMapper");
+        return getSemesterSchoolYearsFromQuery(query);
+    }
+
+    private static List<SemesterSchoolYear> getSemesterSchoolYearsFromQuery(StoredProcedureQuery query) {
         List<?> activeRegisterSemesters = query.getResultList();
         List<SemesterSchoolYear> semesterSchoolYears = new ArrayList<>();
         for (Object object : activeRegisterSemesters){

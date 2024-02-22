@@ -30,6 +30,10 @@ public class SubjectSemesterRepo {
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idKihoc", Integer.class, ParameterMode.IN)
                 .setParameter("idKihoc", idSemesterSchoolYear);
+        return getSubjectSemestersFromQuery(idSemesterSchoolYear, query);
+    }
+
+    private static List<SubjectSemester> getSubjectSemestersFromQuery(Integer idSemesterSchoolYear, StoredProcedureQuery query) {
         List<?> resultSets = query.getResultList();
         List<SubjectSemester> subjectSemesters = new ArrayList<>();
         for(Object object : resultSets){
@@ -38,6 +42,6 @@ public class SubjectSemesterRepo {
                 subjectSemesters.add(subjectSemester);
             }
         }
-        return  subjectSemesters;
+        return subjectSemesters;
     }
 }

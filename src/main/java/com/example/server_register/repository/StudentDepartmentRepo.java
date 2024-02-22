@@ -25,6 +25,10 @@ public class StudentDepartmentRepo {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("departmentOfStudent", "StudentDepartmentMapper")
                 .registerStoredProcedureParameter("idSV", Integer.class, ParameterMode.IN)
                 .setParameter("idSV", idStudent);
+        return getStudentDepartmentsFromQuery(query);
+    }
+
+    private static List<StudentDepartment> getStudentDepartmentsFromQuery(StoredProcedureQuery query) {
         List<?> resultList = query.getResultList();
         List<StudentDepartment> studentDepartments = new ArrayList<>();
         for(Object object : resultList){

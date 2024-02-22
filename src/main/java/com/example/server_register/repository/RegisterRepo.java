@@ -25,6 +25,11 @@ public class RegisterRepo  {
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idKihoc", Integer.class, ParameterMode.IN)
                 .setParameter("idKihoc", idSemesterSchoolYear);
+        return getRegistersFromQuery(query);
+    }
+
+    private static List<Register> getRegistersFromQuery(StoredProcedureQuery query) {
+
         List<?> objects = query.getResultList();
         List<Register> registers = new ArrayList<>();
         for(Object object : objects){
@@ -42,7 +47,6 @@ public class RegisterRepo  {
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                 .setParameter("idLHP", idSectionClass);
-
         return query.execute();
     }
 
@@ -53,7 +57,6 @@ public class RegisterRepo  {
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                 .setParameter("idLHP", idSectionClass);
-
         return query.execute();
     }
 }
