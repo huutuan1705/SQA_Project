@@ -21,12 +21,12 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public boolean deleteOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
-        return registerRepo.deleteOneRegistration(idStudentDepartment, idSectionClass);
+    public void deleteOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+        registerRepo.deleteOneRegistration(idStudentDepartment, idSectionClass);
     }
 
     @Override
-    public boolean insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
-        return registerRepo.insertOneRegistration(idStudentDepartment, idSectionClass);
+    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+        registerRepo.insertOneRegistration(idStudentDepartment, idSectionClass);
     }
 }

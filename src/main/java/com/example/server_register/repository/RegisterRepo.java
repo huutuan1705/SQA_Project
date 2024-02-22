@@ -40,14 +40,14 @@ public class RegisterRepo  {
         return registers;
     }
 
-    public boolean insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
 
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertRegistration")
                 .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                 .setParameter("idLHP", idSectionClass);
-        return query.execute();
+        query.execute();
     }
 
     public boolean deleteOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {

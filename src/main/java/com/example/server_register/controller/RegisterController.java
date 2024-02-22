@@ -23,14 +23,14 @@ public class RegisterController {
     }
 
     @DeleteMapping()
-    public boolean deleteOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+    public void deleteOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
                                          @RequestParam("idSectionClass") Integer idSectionClass){
-        return registerService.deleteOneRegistration(idStudentDepartment, idSectionClass);
+        registerService.deleteOneRegistration(idStudentDepartment, idSectionClass);
     }
 
     @PostMapping()
-    public  boolean insertOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+    public void insertOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
                                           @RequestParam("idSectionClass") Integer idSectionClass){
-        return registerService.insertOneRegistration(idStudentDepartment, idSectionClass);
+        registerService.insertOneRegistration(idStudentDepartment, idSectionClass);
     }
 }
