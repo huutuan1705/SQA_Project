@@ -6,7 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,6 +22,14 @@ public class MemberRepo {
                 .setParameter("usr", member.getUsername())
                 .registerStoredProcedureParameter("pwd", String.class, ParameterMode.IN)
                 .setParameter("pwd", member.getPassword());
+        return (Member) query.getSingleResult();
+    }
+
+    public Member findByUsername(String username) {
+
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("findByUsername", "MemberMapper")
+                .registerStoredProcedureParameter("usn", String.class, ParameterMode.IN)
+                .setParameter("usn", username);
         return (Member) query.getSingleResult();
     }
 }

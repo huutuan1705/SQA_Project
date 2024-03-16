@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface SubjectSemesterService {
 
-    List<SubjectSemester> getSubjectOfStudent(Integer idStudent,
+    List<SubjectSemester> getSubjectOfStudent(Integer idStudentDepartment,
                                               Integer idSemester);
 }

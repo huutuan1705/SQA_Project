@@ -2,7 +2,6 @@ package com.example.server_register.controller;
 
 import com.example.server_register.model.Register;
 import com.example.server_register.service.RegisterService;
-import com.example.server_register.service.impl.RegisterServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
