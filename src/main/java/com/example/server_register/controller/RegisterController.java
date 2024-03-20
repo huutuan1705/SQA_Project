@@ -1,10 +1,15 @@
 package com.example.server_register.controller;
 
+import com.example.server_register.commons.RegisterRespone;
+import com.example.server_register.commons.exception.ErrorMessage;
+import com.example.server_register.commons.exception.ErrorMessageConstant;
 import com.example.server_register.model.Register;
 import com.example.server_register.service.RegisterService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -16,20 +21,23 @@ public class RegisterController {
     private final RegisterService registerService;
 
     @GetMapping()
-    public List<Register> getRegisterOfStudent(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
-                                               @RequestParam("idSemesterSchoolYear") Integer idSemesterSchoolYear){
-        return registerService.getRegisterOfStudent(idStudentDepartment, idSemesterSchoolYear);
+    public RegisterRespone<List<Register>> getRegisterOfStudent(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+                                                               @RequestParam("idSemesterSchoolYear") Integer idSemesterSchoolYear){
+        List<Register> result = registerService.getRegisterOfStudent(idStudentDepartment, idSemesterSchoolYear);
+        return RegisterRespone.build(result);
     }
 
     @DeleteMapping()
-    public void deleteOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+    public RegisterRespone<?> deleteOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
                                          @RequestParam("idSectionClass") Integer idSectionClass){
         registerService.deleteOneRegistration(idStudentDepartment, idSectionClass);
+        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
     }
 
     @PostMapping()
-    public void insertOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
-                                          @RequestParam("idSectionClass") Integer idSectionClass){
+    public RegisterRespone<?> insertOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+                                      @RequestParam("idSectionClass") Integer idSectionClass) throws SQLException {
         registerService.insertOneRegistration(idStudentDepartment, idSectionClass);
+        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
     }
 }

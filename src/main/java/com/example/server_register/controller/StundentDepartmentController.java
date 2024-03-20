@@ -1,5 +1,6 @@
 package com.example.server_register.controller;
 
+import com.example.server_register.commons.RegisterRespone;
 import com.example.server_register.model.StudentDepartment;
 import com.example.server_register.repository.StudentDepartmentRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class StundentDepartmentController {
     private final StudentDepartmentRepo studentDepartmentRepo;
 
     @GetMapping()
-    public List<StudentDepartment> getDepartmentOfStudent(@RequestParam("idStudent") Integer idStudent){
-        return studentDepartmentRepo.getDepartmentOfStudent(idStudent);
+    public RegisterRespone<List<StudentDepartment>> getDepartmentOfStudent(@RequestParam("idStudent") Integer idStudent){
+        return RegisterRespone.build(studentDepartmentRepo.getDepartmentOfStudent(idStudent));
     }
 }

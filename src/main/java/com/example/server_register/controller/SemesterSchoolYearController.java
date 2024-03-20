@@ -1,5 +1,6 @@
 package com.example.server_register.controller;
 
+import com.example.server_register.commons.RegisterRespone;
 import com.example.server_register.model.SemesterSchoolYear;
 import com.example.server_register.service.SemesterSchoolYearService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class SemesterSchoolYearController {
     private final SemesterSchoolYearService semesterSchoolYearService;
 
     @GetMapping("/active")
-    public List<SemesterSchoolYear> getActiveRegisterSemester(){
-        return semesterSchoolYearService.getSemesterSchoolYear();
+    public RegisterRespone<List<SemesterSchoolYear>> getActiveRegisterSemester(){
+        return RegisterRespone.build(semesterSchoolYearService.getSemesterSchoolYear());
     }
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.StoredProcedureQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +39,14 @@ public class RegisterRepo  {
         return registers;
     }
 
-    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
 
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertRegistration")
                 .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                 .setParameter("idLHP", idSectionClass);
+
         query.execute();
     }
 

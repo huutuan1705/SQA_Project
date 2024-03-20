@@ -6,6 +6,7 @@ import com.example.server_register.service.RegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -26,7 +27,7 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
-        registerRepo.insertOneRegistration(idStudentDepartment, idSectionClass);
+    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
+            registerRepo.insertOneRegistration(idStudentDepartment, idSectionClass);
     }
 }
