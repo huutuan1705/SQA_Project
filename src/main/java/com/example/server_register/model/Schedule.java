@@ -31,6 +31,7 @@ import lombok.Setter;
                         @ColumnResult(name = "tentuan", type = String.class),
                         @ColumnResult(name = "tenngay", type = String.class),
                         @ColumnResult(name = "tenkip", type = String.class),
+                        @ColumnResult(name = "des", type = String.class),
                 }
         )
 )
@@ -52,14 +53,14 @@ public class Schedule {
     private SchoolShift schoolShift;
     private String des;
 
-    public Schedule(Integer idSchedule, String sheduleName, String des, Integer idSectionClass, Integer idWeek, Integer idDate, Integer idSchoolShift, Integer idRoom, Integer idTeacher, String teacherName, String roomName, String weekName, String dateName, String shoolShiftName){
+    public Schedule(Integer idSchedule, String sheduleName, String des, Integer idSectionClass, Integer idWeek, Integer idDate, Integer idSchoolShift, Integer idRoom, Integer idTeacher, String teacherName, String roomName, String weekName, String dateName, String shoolShiftName, String weekDes){
         this.id = idSchedule;
         this.name = sheduleName;
         this.des = des;
         this.teacher = new Teacher(idTeacher, teacherName);
         this.room = new Room(idRoom, roomName);
         this.sectionClass = new SectionClass(idSectionClass);
-        this.studyWeek = new StudyWeek(idWeek, weekName);
+        this.studyWeek = new StudyWeek(idWeek, weekName, weekDes);
         this.studyDate= new StudyDate(idDate, dateName);
         this.schoolShift = new SchoolShift(idSchoolShift, shoolShiftName);
     }

@@ -20,7 +20,6 @@ public class RegisterExceptionHandler {
 
     @ExceptionHandler(InvalidInputException.class)
     protected ResponseEntity<RegisterRespone<?>> handleInvalidInputException(InvalidInputException exception){
-        System.out.println("àhbashjfbhjkasbfdhjkasdbjfhbasdkjhfbbfbffbfbfbfbfbfbfbfbbfbfbffbbfbfbffbbfbfbffbfbfbfbbfbfbf");
         log.info("handle invalid input exception: Msg = {}", exception.getErrorMessage().getMessage(), exception);
         return new ResponseEntity<>(RegisterRespone.build(exception.getErrorMessage(),
                                                             exception.getApiSubErrors()),

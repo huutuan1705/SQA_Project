@@ -18,8 +18,9 @@ public class StudyWeek {
     private String name;
     private String des;
 
-    public StudyWeek(Integer idWeek, String weekName) {
+    public StudyWeek(Integer idWeek, String weekName, String weekDes) {
         this.id = idWeek;
         this.name = weekName;
+        this.des = weekDes;
     }
 }

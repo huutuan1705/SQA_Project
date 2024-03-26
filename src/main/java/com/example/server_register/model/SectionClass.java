@@ -30,6 +30,18 @@ import java.util.List;
                 }
         )
 )
+
+
+@SqlResultSetMapping(
+        name = "OneSectionClassMapper",
+        classes = @ConstructorResult(
+                targetClass = SectionClass.class,
+                columns = {
+                        @ColumnResult(name = "id", type = Integer.class),
+                        @ColumnResult(name = "so_tin_chi", type = Integer.class),
+                }
+        )
+)
 public class SectionClass {
     @Id
     private Integer id;
@@ -58,5 +70,10 @@ public class SectionClass {
         this.id = idSectionClass;
         this.name = sectionClassName;
         this.subjectSemester = new SubjectSemester(idSubjectSemester, idSubject, subjectName, credit);
+    }
+
+    public SectionClass(Integer idSectionClass, Integer credit){
+        this.id = idSectionClass;
+        this.subjectSemester = new SubjectSemester(credit);
     }
 }

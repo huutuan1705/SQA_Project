@@ -42,4 +42,8 @@ public class SubjectSemester {
         this.subject = new Subject(idSubject, subjectName, credit);
         this.semesterSchoolYear = new SemesterSchoolYear(idSemesterSchoolYear);
     }
+
+    public SubjectSemester(Integer credit){
+        this.subject = new Subject(credit);
+    }
 }

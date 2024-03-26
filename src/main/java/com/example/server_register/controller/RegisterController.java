@@ -3,6 +3,7 @@ package com.example.server_register.controller;
 import com.example.server_register.commons.RegisterRespone;
 import com.example.server_register.commons.exception.ErrorMessage;
 import com.example.server_register.commons.exception.ErrorMessageConstant;
+import com.example.server_register.dto.RegisterDto;
 import com.example.server_register.model.Register;
 import com.example.server_register.service.RegisterService;
 import jakarta.servlet.http.HttpSession;
@@ -27,17 +28,18 @@ public class RegisterController {
         return RegisterRespone.build(result);
     }
 
-    @DeleteMapping()
-    public RegisterRespone<?> deleteOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
-                                         @RequestParam("idSectionClass") Integer idSectionClass){
-        registerService.deleteOneRegistration(idStudentDepartment, idSectionClass);
+//    @PostMapping()
+//    public RegisterRespone<?> insertOneRegistration(@RequestBody List<RegisterDto> registerDtos) throws SQLException {
+//        registerService.insertRegistration(registerDtos);
+//        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
+//    }
+
+    @PostMapping()
+    public RegisterRespone<?> insertOneRegistration(@RequestParam("idStudentDepartment") Integer idStudentDepartment,
+                                                    @RequestParam("idSectionClass") Integer idSectionClass) throws SQLException {
+        registerService.insertTest(idStudentDepartment, idSectionClass);
         return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
     }
 
-    @PostMapping()
-    public RegisterRespone<?> insertOneRegistration(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
-                                      @RequestParam("idSectionClass") Integer idSectionClass) throws SQLException {
-        registerService.insertOneRegistration(idStudentDepartment, idSectionClass);
-        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
-    }
+
 }

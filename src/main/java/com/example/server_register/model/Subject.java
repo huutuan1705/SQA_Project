@@ -33,4 +33,8 @@ public class Subject {
         this.name = subjectName;
         this.credit = credit;
     }
+
+    public Subject(Integer credit){
+        this.credit = credit;
+    }
 }

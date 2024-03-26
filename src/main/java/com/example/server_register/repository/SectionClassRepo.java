@@ -35,4 +35,16 @@ public class SectionClassRepo {
         }
         return sectionClasses;
     }
+
+    public SectionClass getOneSectionClass(Integer idSectionClass){
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("getOneSectionClass", "OneSectionClassMapper")
+                .registerStoredProcedureParameter("idMHKH", Integer.class, ParameterMode.IN)
+                .setParameter("idMHKH", idSectionClass);
+        return getOneSectionClassFromQuery(query);
+    }
+
+    private SectionClass getOneSectionClassFromQuery(StoredProcedureQuery query) {
+        Object object = query.getSingleResult();
+        return (SectionClass) object;
+    }
 }

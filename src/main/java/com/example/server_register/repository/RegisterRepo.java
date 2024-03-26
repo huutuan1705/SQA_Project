@@ -1,5 +1,6 @@
 package com.example.server_register.repository;
 
+import com.example.server_register.dto.RegisterDto;
 import com.example.server_register.model.Register;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
@@ -39,24 +40,22 @@ public class RegisterRepo  {
         return registers;
     }
 
-    public void insertOneRegistration(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
-
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertRegistration")
-                .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
-                .setParameter("idSVK", idStudentDepartment)
-                .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
-                .setParameter("idLHP", idSectionClass);
-
-        query.execute();
+    public void insertOneRegistration(RegisterDto registerDto) throws SQLException {
+            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("inserttest")
+                    .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
+                    .setParameter("idSVK", registerDto.getIdStudentDepartment())
+                    .setParameter("idLHP", registerDto.getIdSectionClass());
+            query.execute();
     }
 
-    public boolean deleteOneRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+    public boolean deleteOneRegistration(RegisterDto registerDto) {
 
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("DeleteOneRegistration")
                 .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
-                .setParameter("idSVK", idStudentDepartment)
+                .setParameter("idSVK", registerDto.getIdStudentDepartment())
                 .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
-                .setParameter("idLHP", idSectionClass);
+                .setParameter("idLHP", registerDto.getIdSectionClass());
         return query.execute();
     }
 }
