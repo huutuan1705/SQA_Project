@@ -40,13 +40,22 @@ public class RegisterRepo  {
         return registers;
     }
 
-    public void insertOneRegistration(RegisterDto registerDto) throws SQLException {
-            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("inserttest")
+    public boolean insertOneRegistration(RegisterDto registerDto) throws SQLException {
+            StoredProcedureQuery query = entityManager.createStoredProcedureQuery("inserttestv4")
                     .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
                     .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
                     .setParameter("idSVK", registerDto.getIdStudentDepartment())
                     .setParameter("idLHP", registerDto.getIdSectionClass());
-            query.execute();
+            return query.execute();
+    }
+
+    public void inserttestRegistration(RegisterDto registerDto) throws SQLException {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertRegistration")
+                .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("idLHP", Integer.class, ParameterMode.IN)
+                .setParameter("idSVK", registerDto.getIdStudentDepartment())
+                .setParameter("idLHP", registerDto.getIdSectionClass());
+        query.execute();
     }
 
     public boolean deleteOneRegistration(RegisterDto registerDto) {

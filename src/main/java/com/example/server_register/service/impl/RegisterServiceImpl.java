@@ -37,6 +37,11 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
+    public void deleteRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+        registerRepo.deleteOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
+    }
+
+    @Override
     public List<Register> getRegisterOfStudent(Integer idStudentDepartment, Integer idSemesterSchoolYear) {
         return registerRepo.getRegisterOfStudent(idStudentDepartment, idSemesterSchoolYear);
     }
@@ -51,28 +56,34 @@ public class RegisterServiceImpl implements RegisterService {
         handleDeleteRegistration(newRegisterList, registeredList);
     }
 
-    private void handleAddNewRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) {
-        registeredList.forEach(register -> {
-            int registeredId = register.getSectionClass().getId();
-            if (newRegisterList.stream().noneMatch(dto -> dto.getIdSectionClass() == registeredId)) {
-                try {
-                    // ngược
-                    registerRepo.insertOneRegistration(getDto(newRegisterList, registeredId));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
+    private void handleDeleteRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) {
+        int id = newRegisterList.get(0).getIdStudentDepartment();
+        for (Register register : registeredList){
+            int check = 0;
+            for (RegisterDto registerDto : newRegisterList){
+                if(registerDto.getIdSectionClass() == register.getSectionClass().getId()){
+                    check = 1;
                 }
             }
-        });
+            if (check == 0){
+                registerRepo.deleteOneRegistration(new RegisterDto(id,register.getSectionClass().getId()));
+            }
+        }
     }
 
 
-    private void handleDeleteRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) {
-        newRegisterList.forEach(dto -> {
-            int newRegisterId = dto.getIdSectionClass();
-            if (registeredList.stream().noneMatch(register -> register.getSectionClass().getId() == newRegisterId)) {
-                registerRepo.deleteOneRegistration(getDto(newRegisterList, newRegisterId));
+    private void handleAddNewRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) throws SQLException {
+        for(RegisterDto registerDto : newRegisterList){
+            int check = 0;
+            for (Register register : registeredList){
+                if(register.getSectionClass().getId().equals(registerDto.getIdSectionClass())){
+                    check = 1;
+                }
             }
-        });
+            if(check == 0){
+                registerRepo.inserttestRegistration(registerDto);
+            }
+        }
     }
 
     private RegisterDto getDto(List<RegisterDto> newRegisterList, int registeredId) {

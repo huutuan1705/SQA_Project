@@ -17,7 +17,7 @@ public class SectionClassRepo {
     private final EntityManager entityManager;
 
     public List<SectionClass> getSectionClass(Integer idStudentDepartment, Integer idSubjectSemester){
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("getSectionClass", "SectionClassMapper")
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("getSectionClassv2", "SectionClassMapper")
                 .registerStoredProcedureParameter("idSVK", Integer.class, ParameterMode.IN)
                 .setParameter("idSVK", idStudentDepartment)
                 .registerStoredProcedureParameter("idMHKH", Integer.class, ParameterMode.IN)

@@ -41,5 +41,16 @@ public class RegisterController {
         return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
     }
 
+    @PostMapping("/test")
+    public RegisterRespone<?> insert(@RequestBody List<RegisterDto> registerDtos) throws SQLException {
+        registerService.insertRegistration(registerDtos);
+        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
+    }
 
+    @DeleteMapping()
+    public RegisterRespone<?> deleteRegistration(@RequestParam("idStudentDepartment") Integer idStudentDepartment,
+                                                 @RequestParam("idSectionClass") Integer idSectionClass){
+        registerService.deleteRegistration(idStudentDepartment, idSectionClass);
+        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
+    }
 }

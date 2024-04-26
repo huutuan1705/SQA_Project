@@ -14,4 +14,6 @@ public interface RegisterService {
     void insertRegistration(List<RegisterDto> registerDtos) throws SQLException;
 
     void insertTest(Integer idStudentDepartment, Integer idSectionClass) throws SQLException;
+
+    void deleteRegistration(Integer idStudentDepartment, Integer idSectionClass);
 }
