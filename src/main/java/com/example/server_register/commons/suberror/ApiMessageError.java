@@ -11,7 +11,7 @@ public class ApiMessageError implements ApiSubError{
     }
 
     @Override
-    public String getErrorMesagee() {
+    public String getErrorMessage() {
         return errorMessage;
     }
 }

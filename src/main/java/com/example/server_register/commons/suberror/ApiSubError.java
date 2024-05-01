@@ -4,5 +4,5 @@ import java.io.Serializable;
 
 
 public interface ApiSubError extends Serializable {
-    String getErrorMesagee();
+    String getErrorMessage();
 }

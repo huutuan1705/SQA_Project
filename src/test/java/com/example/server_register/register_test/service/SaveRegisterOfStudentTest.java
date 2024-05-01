@@ -222,7 +222,7 @@ class SaveRegisterOfStudentTest {
 
         } catch (InvalidInputException exception){
             Assertions.assertEquals("Total credit must be less than 19"
-                    , exception.getApiSubErrors().get(0).getErrorMesagee());        }
+                    , exception.getApiSubErrors().get(0).getErrorMessage());        }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -253,7 +253,7 @@ class SaveRegisterOfStudentTest {
 
         } catch (InvalidInputException exception){
             Assertions.assertEquals("Total credit must be greater than 13"
-                    , exception.getApiSubErrors().get(0).getErrorMesagee());        }
+                    , exception.getApiSubErrors().get(0).getErrorMessage());        }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
