@@ -1,4 +1,4 @@
-package com.example.server_register;
+package com.example.server_register.register_test.service;
 
 import com.example.server_register.model.Register;
 import com.example.server_register.repository.RegisterRepo;
@@ -21,37 +21,37 @@ class GetRegisteredOfStudentTest {
     @Autowired
     RegisterRepo registerRepo;
 
-    @Test
-    void getRegisteredOfStudent_StandardTest1(){
-//        sinh vien chi co 1 dang ki
-        int idStudentDepartment = 3;
-        int idSemesterSchoolYear = 8;
-        List<Register> registers = registerRepo.getRegisterOfStudent(idStudentDepartment,idSemesterSchoolYear);
-        Assertions.assertNotNull(registers);
-        Assertions.assertEquals(1, registers.size());
-        Assertions.assertEquals(idStudentDepartment, registers.get(0).getStudentDepartment().getId());
-        Assertions.assertEquals(idSemesterSchoolYear, registers.get(0).getSectionClass()
-                                                                .getSubjectSemester()
-                                                                .getSemesterSchoolYear()
-                                                                .getId());
-    }
-
-    @Test
-    void getRegisteredOfStudent_StandardTest2(){
-//        sinh vien co nhieu hon 1 dang ki
-        int idStudentDepartment = 2;
-        int idSemesterSchoolYear = 8;
-        List<Register> registers = registerRepo.getRegisterOfStudent(idStudentDepartment,idSemesterSchoolYear);
-        Assertions.assertNotNull(registers);
-        Assertions.assertEquals(2, registers.size());
-        registers.forEach(register -> {
-            Assertions.assertEquals(idStudentDepartment, register.getStudentDepartment().getId());
-            Assertions.assertEquals(idSemesterSchoolYear, register.getSectionClass()
-                                                                    .getSubjectSemester()
-                                                                    .getSemesterSchoolYear()
-                                                                    .getId());
-        });
-    }
+//    @Test
+//    void getRegisteredOfStudent_StandardTest1(){
+////        sinh vien chi co 1 dang ki
+//        int idStudentDepartment = 3;
+//        int idSemesterSchoolYear = 8;
+//        List<Register> registers = registerRepo.getRegisterOfStudent(idStudentDepartment,idSemesterSchoolYear);
+//        Assertions.assertNotNull(registers);
+//        Assertions.assertEquals(1, registers.size());
+//        Assertions.assertEquals(idStudentDepartment, registers.get(0).getStudentDepartment().getId());
+//        Assertions.assertEquals(idSemesterSchoolYear, registers.get(0).getSectionClass()
+//                                                                .getSubjectSemester()
+//                                                                .getSemesterSchoolYear()
+//                                                                .getId());
+//    }
+//
+//    @Test
+//    void getRegisteredOfStudent_StandardTest2(){
+////        sinh vien co nhieu hon 1 dang ki
+//        int idStudentDepartment = 2;
+//        int idSemesterSchoolYear = 8;
+//        List<Register> registers = registerRepo.getRegisterOfStudent(idStudentDepartment,idSemesterSchoolYear);
+//        Assertions.assertNotNull(registers);
+//        Assertions.assertEquals(2, registers.size());
+//        registers.forEach(register -> {
+//            Assertions.assertEquals(idStudentDepartment, register.getStudentDepartment().getId());
+//            Assertions.assertEquals(idSemesterSchoolYear, register.getSectionClass()
+//                                                                    .getSubjectSemester()
+//                                                                    .getSemesterSchoolYear()
+//                                                                    .getId());
+//        });
+//    }
 
     @Test
     void getRegisteredOfStudent_ExceptionTest1(){

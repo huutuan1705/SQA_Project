@@ -9,4 +9,9 @@ public class ApiMessageError implements ApiSubError{
     public ApiMessageError(String errorMessage){
         this.errorMessage = errorMessage;
     }
+
+    @Override
+    public String getErrorMesagee() {
+        return errorMessage;
+    }
 }

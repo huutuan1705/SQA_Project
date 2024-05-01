@@ -8,6 +8,6 @@ class ServerRegisterApplicationTests {
 
     @Test
     void contextLoads() {
-    }
 
+    }
 }

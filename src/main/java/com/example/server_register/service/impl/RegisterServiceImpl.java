@@ -31,15 +31,15 @@ public class RegisterServiceImpl implements RegisterService {
     private final SectionClassRepo sectionClassRepo;
     private final SemesterSchoolYearRepo semesterSchoolYearRepo;
 
-    @Override
-    public void insertTest(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
-        registerRepo.insertOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
-    }
+//    @Override
+//    public void insertTest(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
+//        registerRepo.insertOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
+//    }
 
-    @Override
-    public void deleteRegistration(Integer idStudentDepartment, Integer idSectionClass) {
-        registerRepo.deleteOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
-    }
+//    @Override
+//    public void deleteRegistration(Integer idStudentDepartment, Integer idSectionClass) {
+//        registerRepo.deleteOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
+//    }
 
     @Override
     public List<Register> getRegisterOfStudent(Integer idStudentDepartment, Integer idSemesterSchoolYear) {
@@ -47,13 +47,14 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public void insertRegistration(List<RegisterDto> newRegisterList) throws SQLException {
+    public boolean insertRegistration(List<RegisterDto> newRegisterList) throws SQLException {
 
         List<SemesterSchoolYear> getSemes = semesterSchoolYearRepo.getSemesterRegister();
         List<Register> registeredList = registerRepo.getRegisterOfStudent(newRegisterList.get(0).getIdStudentDepartment(), getSemes.get(0).getId());
         validateCredit(newRegisterList);
-        handleAddNewRegistration(newRegisterList, registeredList);
         handleDeleteRegistration(newRegisterList, registeredList);
+        handleAddNewRegistration(newRegisterList, registeredList);
+        return true;
     }
 
     private void handleDeleteRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) {
@@ -61,8 +62,9 @@ public class RegisterServiceImpl implements RegisterService {
         for (Register register : registeredList){
             int check = 0;
             for (RegisterDto registerDto : newRegisterList){
-                if(registerDto.getIdSectionClass() == register.getSectionClass().getId()){
+                if (registerDto.getIdSectionClass().equals(register.getSectionClass().getId())) {
                     check = 1;
+                    break;
                 }
             }
             if (check == 0){
@@ -78,30 +80,32 @@ public class RegisterServiceImpl implements RegisterService {
             for (Register register : registeredList){
                 if(register.getSectionClass().getId().equals(registerDto.getIdSectionClass())){
                     check = 1;
+                    break;
                 }
             }
             if(check == 0){
-                registerRepo.inserttestRegistration(registerDto);
+//                registerRepo.inserttestRegistration(registerDto);
+                registerRepo.insertOneRegistration(registerDto);
             }
         }
     }
 
-    private RegisterDto getDto(List<RegisterDto> newRegisterList, int registeredId) {
-        return newRegisterList.stream()
-                .filter(dto -> dto.getIdSectionClass() == registeredId)
-                .findFirst()
-                .orElse(null);
-    }
+//    private RegisterDto getDto(List<RegisterDto> newRegisterList, int registeredId) {
+//        return newRegisterList.stream()
+//                .filter(dto -> dto.getIdSectionClass() == registeredId)
+//                .findFirst()
+//                .orElse(null);
+//    }
 
     private void validateCredit(List<RegisterDto> registerDtos) {
         int totalCredit = getTotalCredit(registerDtos);
-        if (totalCredit > 19) {
+        if (totalCredit >= 19) {
             throw new InvalidInputException(ErrorMessageConstant.BAD_REQUEST,
-                    Collections.singletonList(new ApiMessageError("Total credit must be less than 19")));
+                    new ApiMessageError("Total credit must be less than 19"));
         }
-        if (totalCredit < 14) {
+        if (totalCredit <= 13) {
             throw new InvalidInputException(ErrorMessageConstant.BAD_REQUEST,
-                    Collections.singletonList(new ApiMessageError("Total credit must be greater than 13")));
+                    new ApiMessageError("Total credit must be greater than 13"));
         }
     }
 
@@ -113,6 +117,7 @@ public class RegisterServiceImpl implements RegisterService {
                                             .getSubject()
                                             .getCredit();
         }
+        System.out.println(totalCredit);
         return totalCredit;
     }
 }
