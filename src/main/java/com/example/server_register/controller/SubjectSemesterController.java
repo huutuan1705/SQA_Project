@@ -4,7 +4,6 @@ import com.example.server_register.commons.RegisterRespone;
 import com.example.server_register.model.SubjectSemester;
 import com.example.server_register.service.SubjectSemesterService;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

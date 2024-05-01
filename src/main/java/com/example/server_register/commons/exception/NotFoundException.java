@@ -1,6 +1,5 @@
 package com.example.server_register.commons.exception;
 
-import com.example.server_register.commons.suberror.ApiMessageError;
 import com.example.server_register.commons.suberror.ApiSubError;
 import lombok.Getter;
 

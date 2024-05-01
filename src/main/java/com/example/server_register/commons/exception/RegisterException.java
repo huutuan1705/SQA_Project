@@ -10,9 +10,4 @@ public class RegisterException extends RuntimeException{
         super();
         this.errorMessage = errorMessage;
     }
-
-    public RegisterException(){
-        super();
-        errorMessage = null;
-    }
 }

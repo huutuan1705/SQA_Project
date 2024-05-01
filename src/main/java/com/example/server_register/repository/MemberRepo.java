@@ -6,7 +6,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -5,22 +5,16 @@ import com.example.server_register.commons.exception.InvalidInputException;
 import com.example.server_register.commons.suberror.ApiMessageError;
 import com.example.server_register.dto.RegisterDto;
 import com.example.server_register.model.Register;
-import com.example.server_register.model.SectionClass;
 import com.example.server_register.model.SemesterSchoolYear;
 import com.example.server_register.repository.RegisterRepo;
 import com.example.server_register.repository.SectionClassRepo;
 import com.example.server_register.repository.SemesterSchoolYearRepo;
 import com.example.server_register.service.RegisterService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -31,15 +25,6 @@ public class RegisterServiceImpl implements RegisterService {
     private final SectionClassRepo sectionClassRepo;
     private final SemesterSchoolYearRepo semesterSchoolYearRepo;
 
-//    @Override
-//    public void insertTest(Integer idStudentDepartment, Integer idSectionClass) throws SQLException {
-//        registerRepo.insertOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
-//    }
-
-//    @Override
-//    public void deleteRegistration(Integer idStudentDepartment, Integer idSectionClass) {
-//        registerRepo.deleteOneRegistration(new RegisterDto(idStudentDepartment, idSectionClass));
-//    }
 
     @Override
     public List<Register> getRegisterOfStudent(Integer idStudentDepartment, Integer idSemesterSchoolYear) {
@@ -84,18 +69,11 @@ public class RegisterServiceImpl implements RegisterService {
                 }
             }
             if(check == 0){
-//                registerRepo.inserttestRegistration(registerDto);
                 registerRepo.insertOneRegistration(registerDto);
             }
         }
     }
 
-//    private RegisterDto getDto(List<RegisterDto> newRegisterList, int registeredId) {
-//        return newRegisterList.stream()
-//                .filter(dto -> dto.getIdSectionClass() == registeredId)
-//                .findFirst()
-//                .orElse(null);
-//    }
 
     private void validateCredit(List<RegisterDto> registerDtos) {
         int totalCredit = getTotalCredit(registerDtos);
@@ -117,7 +95,6 @@ public class RegisterServiceImpl implements RegisterService {
                                             .getSubject()
                                             .getCredit();
         }
-        System.out.println(totalCredit);
         return totalCredit;
     }
 }

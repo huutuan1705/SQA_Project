@@ -2,14 +2,11 @@ package com.example.server_register.commons.exception;
 
 import com.example.server_register.commons.RegisterRespone;
 import com.example.server_register.commons.suberror.ApiMessageError;
-import jakarta.persistence.NoResultException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.sql.SQLException;
 import java.util.Collections;
