@@ -12,6 +12,7 @@ import com.example.server_register.repository.SemesterSchoolYearRepo;
 import com.example.server_register.service.RegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -32,6 +33,7 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
+    @Transactional
     public boolean insertRegistration(List<RegisterDto> newRegisterList) throws SQLException {
 
         List<SemesterSchoolYear> getSemes = semesterSchoolYearRepo.getSemesterRegister();
@@ -40,6 +42,14 @@ public class RegisterServiceImpl implements RegisterService {
         handleDeleteRegistration(newRegisterList, registeredList);
         handleAddNewRegistration(newRegisterList, registeredList);
         return true;
+    }
+
+    @Override
+    public void deleteAllRegistrationList(Integer idStudentDepartment, Integer idSemesterSchoolYear) {
+        List<Register> registers = registerRepo.getRegisterOfStudent(idStudentDepartment, idSemesterSchoolYear);
+        registers.forEach(register -> {
+            registerRepo.deleteOneRegistration(new RegisterDto(idStudentDepartment, register.getSectionClass().getId()));
+        });
     }
 
     private void handleDeleteRegistration(List<RegisterDto> newRegisterList, List<Register> registeredList) {
@@ -79,11 +89,11 @@ public class RegisterServiceImpl implements RegisterService {
         int totalCredit = getTotalCredit(registerDtos);
         if (totalCredit >= 19) {
             throw new InvalidInputException(ErrorMessageConstant.BAD_REQUEST,
-                    new ApiMessageError("Total credit must be less than 19"));
+                    new ApiMessageError("Tổng số tín chỉ phải nhỏ 19"));
         }
         if (totalCredit <= 13) {
             throw new InvalidInputException(ErrorMessageConstant.BAD_REQUEST,
-                    new ApiMessageError("Total credit must be greater than 13"));
+                    new ApiMessageError("Tổng số tín chỉ phải lớn hơn 13"));
         }
     }
 

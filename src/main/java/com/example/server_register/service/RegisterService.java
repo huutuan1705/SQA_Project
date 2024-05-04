@@ -13,4 +13,5 @@ public interface RegisterService {
 
     boolean insertRegistration(List<RegisterDto> registerDtos) throws SQLException;
 
+    void deleteAllRegistrationList(Integer idStudentDepartment, Integer idSemesterSchoolYear);
 }

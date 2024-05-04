@@ -31,4 +31,11 @@ public class RegisterController {
         registerService.insertRegistration(registerDtos);
         return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
     }
+
+    @DeleteMapping()
+    public RegisterRespone<?> deleteAllRegistrationList(@RequestParam("idStudentDepartment")Integer idStudentDepartment,
+                                                        @RequestParam("idSemesterSchoolYear") Integer idSemesterSchoolYear) {
+        registerService.deleteAllRegistrationList(idStudentDepartment, idSemesterSchoolYear);
+        return RegisterRespone.build(ErrorMessageConstant.SUCCESS);
+    }
 }
