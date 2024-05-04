@@ -4,13 +4,18 @@ import { ISectionClass } from './context/models/SectionClass';
 import { toast } from 'react-toastify';
 
 function SelectedTable() {
+  
   const {
+    subjectSemesterSchoolYearForm,
     selectedSectionClasses,
     registerOfStudent,
     handleDeselectSectionClass,
     handleRegisterSectionClasses,
   } = useContext(DataContext);
-
+  
+  if (!subjectSemesterSchoolYearForm.idSemesterSchoolYear || !subjectSemesterSchoolYearForm.idStudentDepartment) {
+    return <></>
+  }
   const totalCredits = selectedSectionClasses.reduce(
     (prev, s) => prev + s.sectionClass.subjectSemester.subject.credit,
     0
@@ -32,6 +37,7 @@ function SelectedTable() {
       }
     }
   }, [selectedSectionClasses]);
+
   return (
     <div>
       <div className='description'>

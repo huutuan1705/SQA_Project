@@ -113,8 +113,8 @@ function Data({ children }: any) {
         sc.push(ds);
       }
     });
-    
-    if (!isInit && !!subjectSemesterSchoolYearForm.idSemesterSchoolYear && !!subjectSemesterSchoolYearForm.idStudentDepartment) {
+
+    if (!isInit) {
       setIsInit((_) => false);
       setSelectedSectionClassesLocal(sc);
       setSelectedSectionClasses(sc);

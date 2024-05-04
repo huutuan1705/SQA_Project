@@ -12,11 +12,8 @@ interface props {
 function DataTable({ data }: props) {
   const {
     handleSelectSectionClass,
-
     handleDeselectSectionClass,
-    handleRegisterSectionClasses,
     selectedSectionClasses,
-    subjectSemesterSchoolYearForm,
     registerOfStudent,
   } = useContext(DataContext);
 
