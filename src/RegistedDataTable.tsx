@@ -5,30 +5,39 @@ import { toast } from 'react-toastify';
 function RegistedDataTable() {
   const {
     registerOfStudent,
-    handleDeleteSectionClass,
+    handleDeleteAllSectionClass,
     subjectSemesterSchoolYearForm,
   } = useContext(DataContext);
-  const handleDeselect = useCallback(
-    async (idSectionClass: number) => {
-      if (window.confirm('Bạn có muốn bỏ đăng kí lớp học phần này không?')) {
-        const isSuccess = await handleDeleteSectionClass({
-          idSectionClass,
-          idStudentDepartment:
-            subjectSemesterSchoolYearForm.idStudentDepartment,
-        });
-        if (isSuccess) {
-          toast.info('Bỏ đăng kí môn học thành công.');
-        } else {
-          toast.error('Bỏ đăng kí môn học thất bại.');
-        }
+  const handleDeleteAll = useCallback(async () => {
+    if (
+      window.confirm('Bạn có muốn xóa tất cả lớp học phần đã đăng ký không?')
+    ) {
+      const isSuccess = await handleDeleteAllSectionClass(
+        subjectSemesterSchoolYearForm
+      );
+      if (isSuccess) {
+        toast.info('Xóa tất cả môn học thành công.');
+      } else {
+        toast.error('Xóa tất cả môn học thất bại.');
       }
-    },
-    [subjectSemesterSchoolYearForm]
-  );
+    }
+  }, [subjectSemesterSchoolYearForm]);
   return (
-    <div style={{ maxWidth: 600 }}>
+    <div>
       <div className='description'>
         <h3>Danh sách môn học đã đăng ký</h3>
+      </div>
+      <div
+        className='description'
+        style={{ display: 'flex', justifyContent: 'flex-end' }}
+      >
+        <button
+          className='cursor-pointer'
+          disabled={registerOfStudent.length === 0}
+          onClick={handleDeleteAll}
+        >
+          Xóa tất cả
+        </button>
       </div>
       <table className='data-table'>
         <thead>

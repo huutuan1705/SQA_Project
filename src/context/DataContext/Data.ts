@@ -35,9 +35,9 @@ export interface IData {
   refetchSectionClasses: () => void;
   handleSelectSectionClass: (sectionClass: ISectionClass) => void;
   handleDeselectSectionClass: (sectionClass: ISectionClass) => void;
-  handleDeleteSectionClass: (params: {
+  handleDeleteAllSectionClass: (params: {
     idStudentDepartment: number;
-    idSectionClass: number;
+    idSemesterSchoolYear: number;
   }) => Promise<boolean>;
   handleRegisterSectionClasses: (
     selectedSectionClasses: ISelectedSectionClass[]
@@ -62,7 +62,7 @@ export const initData: IData = {
   refetchSectionClasses: () => {},
   handleSelectSectionClass: () => {},
   handleDeselectSectionClass: () => {},
-  handleDeleteSectionClass: async () => false,
+  handleDeleteAllSectionClass: async () => false,
   handleRegisterSectionClasses: async () => false,
 
   // refetchGetSchedulesOfSectionClasses: () => {},

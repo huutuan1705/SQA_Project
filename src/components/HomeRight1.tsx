@@ -141,7 +141,9 @@ export default function LoginForm() {
           Quên mật khẩu
         </a> */}
         <i className='fa-solid fa-right-to-bracket'></i>
-        <button type='submit'>Đăng nhập</button>
+        <button id='submit' type='submit'>
+          Đăng nhập
+        </button>
         <div
           id='errorMessage'
           style={{ color: 'red', textAlign: 'center', margin: '10px' }}

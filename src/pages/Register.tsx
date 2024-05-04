@@ -76,7 +76,7 @@ function Register() {
               />
               {'\t'}
               <Dropdown
-                title='Chọn kì học'
+                title='Chọn kỳ học'
                 options={semesterSchoolYearsOpt}
                 defaultValue={subjectForm.idSemesterSchoolYear}
                 onSelect={(val) => {
@@ -89,6 +89,7 @@ function Register() {
               />
               <div>
                 <button
+                  id='submit-subject-form'
                   disabled={
                     isNaN(subjectForm.idStudentDepartment) ||
                     isNaN(subjectForm.idSemesterSchoolYear)

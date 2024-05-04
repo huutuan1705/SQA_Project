@@ -11,12 +11,35 @@ import axios from 'axios';
 import { IData, initData, ISelectedSectionClass } from './Data';
 import { ISectionClass } from '../models/SectionClass';
 
+const setSelectedSectionClassesLocal = (sc: ISelectedSectionClass[]) => {
+  return localStorage.setItem(
+    `selectedSectionClass`,
+    JSON.stringify(
+      sc.map((s) => ({
+        ...s,
+        sectionClass: { ...s.sectionClass, schedules: undefined },
+      }))
+    )
+  );
+};
+
+const getSelectedSectionClassesLocal = (): ISelectedSectionClass[] | null => {
+  const sc = localStorage.getItem(`selectedSectionClass`);
+  if (!sc) return null;
+  return JSON.parse(sc);
+};
+
 export const DataContext = createContext<IData>(initData);
 function Data({ children }: any) {
+  const [isInit, setIsInit] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedSectionClasses, setSelectedSectionClasses] = useState<
+  const [_selectedSectionClasses, setSelectedSectionClasses] = useState<
     ISelectedSectionClass[]
-  >([]);
+  >(getSelectedSectionClassesLocal() ?? []);
+
+  const selectedSectionClasses = (() => {
+    return getSelectedSectionClassesLocal() || _selectedSectionClasses;
+  })();
 
   // form
   const [subjectSemesterSchoolYearForm, setSubjectSemesterSchoolYearForm] =
@@ -65,21 +88,37 @@ function Data({ children }: any) {
     const idStudentDepartment = localStorage.getItem('idStudentDepartment');
     const idSemesterSchoolYear = localStorage.getItem('idSemesterSchoolYear');
     if (!!idSemesterSchoolYear && !!idStudentDepartment) {
-      console.log(idStudentDepartment, idSemesterSchoolYear);
       refetchSubjectSemesterSchoolYears();
     }
   }, []);
 
   useEffect(() => {
-    setSelectedSectionClasses(() => {
-      return [
-        ...registerOfStudent.map((r) => ({
-          sectionClass: r.sectionClass,
-          idStudentDepartment:
-            subjectSemesterSchoolYearForm.idStudentDepartment,
-        })),
-      ];
+    const existedSc = getSelectedSectionClassesLocal() ?? [];
+    const newSc: ISelectedSectionClass[] = [
+      ...registerOfStudent.map((r) => ({
+        sectionClass: r.sectionClass,
+        idStudentDepartment: subjectSemesterSchoolYearForm.idStudentDepartment,
+      })),
+    ];
+
+    const duplicatedSc = [...newSc, ...existedSc];
+
+    const sc: ISelectedSectionClass[] = [...newSc];
+    // console.log({ existedSc, newSc });
+
+    duplicatedSc.forEach((ds) => {
+      if (
+        sc.findIndex((s) => s.sectionClass.id === ds.sectionClass.id) === -1
+      ) {
+        sc.push(ds);
+      }
     });
+    
+    if (!isInit && !!subjectSemesterSchoolYearForm.idSemesterSchoolYear && !!subjectSemesterSchoolYearForm.idStudentDepartment) {
+      setIsInit((_) => false);
+      setSelectedSectionClassesLocal(sc);
+      setSelectedSectionClasses(sc);
+    }
   }, [registerOfStudent, subjectSemesterSchoolYearForm]);
 
   // const { schedules, refetch: refetchGetSchedulesOfSectionClasses } =
@@ -95,7 +134,7 @@ function Data({ children }: any) {
   const handleSelectSectionClass = useCallback(
     (sectionClass: ISectionClass) => {
       setSelectedSectionClasses((prev) => {
-        return [
+        const sc = [
           ...prev.filter(
             (s) =>
               s.sectionClass.subjectSemester.id !==
@@ -107,6 +146,8 @@ function Data({ children }: any) {
             sectionClass,
           },
         ];
+        setSelectedSectionClassesLocal(sc);
+        return sc;
       });
     },
     [subjectSemesterSchoolYearForm]
@@ -114,9 +155,11 @@ function Data({ children }: any) {
 
   const handleDeselectSectionClass = useCallback(
     (sectionClass: ISectionClass) => {
-      setSelectedSectionClasses((prev) =>
-        prev.filter((s) => s.sectionClass.id !== sectionClass.id)
-      );
+      setSelectedSectionClasses((prev) => {
+        const sc = prev.filter((s) => s.sectionClass.id !== sectionClass.id);
+        setSelectedSectionClassesLocal(sc);
+        return sc;
+      });
     },
     [subjectSemesterSchoolYearForm]
   );
@@ -151,12 +194,16 @@ function Data({ children }: any) {
     []
   );
 
-  const handleDeleteSectionClass = useCallback(
-    async (params: { idStudentDepartment: number; idSectionClass: number }) => {
+  const handleDeleteAllSectionClass = useCallback(
+    async (params: {
+      idStudentDepartment: number;
+      idSemesterSchoolYear: number;
+    }) => {
       try {
-        const { status } = await api.delete<any[]>(
-          `students/register?idStudentDepartment=${params.idStudentDepartment}&idSectionClass=${params.idSectionClass}`
+        const res = await api.delete<any[]>(
+          `students/register?idStudentDepartment=${params.idStudentDepartment}&idSemesterSchoolYear=${params.idSemesterSchoolYear}`
         );
+        const { status } = res;
         if (status === 200) {
           refetchRegisterOfStudent();
           refetchSectionClasses();
@@ -197,7 +244,7 @@ function Data({ children }: any) {
         refetchSectionClasses,
         handleSelectSectionClass,
         handleDeselectSectionClass,
-        handleDeleteSectionClass,
+        handleDeleteAllSectionClass,
         // refetchGetSchedulesOfSectionClasses,
         handleRegisterSectionClasses,
       }}

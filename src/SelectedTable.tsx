@@ -33,7 +33,7 @@ function SelectedTable() {
     }
   }, [selectedSectionClasses]);
   return (
-    <div style={{ maxWidth: 600 }}>
+    <div>
       <div className='description'>
         <h3>Danh sách môn học đang được chọn</h3>
       </div>
@@ -45,9 +45,10 @@ function SelectedTable() {
           Tổng số tín chỉ: <b>{totalCredits}</b>
         </p>
         <button
-          title='Tổng số tín chỉ phải lớn hơn hoặc bằng 13.'
+          id='save-register'
+          title='Tổng số tín chỉ phải lớn hơn 13.'
           className='cursor-pointer'
-          disabled={totalCredits < 13}
+          disabled={totalCredits <= 13}
           onClick={handleSaveRegister}
         >
           Lưu đăng ký
@@ -75,7 +76,12 @@ function SelectedTable() {
               <td style={{ textAlign: 'center' }}>
                 {sectionClass.subjectSemester.subject.credit}
               </td>
-              <td>{checkIsSaved(sectionClass) && <span>Đã lưu</span>}</td>
+              <td>
+                {' '}
+                <span>
+                  {checkIsSaved(sectionClass) ? 'Đã' : 'Chưa'} lưu CSDL
+                </span>
+              </td>
               <td style={{ textAlign: 'center' }}>
                 <button
                   className='cursor-pointer'

@@ -109,6 +109,7 @@ function DataTable({ data }: props) {
                   <td style={{ width: 32, padding: 0 }}>
                     <label className='section-class-input-label'>
                       <input
+                        data-section-class-id={sc.id}
                         type='checkbox'
                         checked={isChecked(sc)}
                         // name={`section-classes-${sc.id}`}

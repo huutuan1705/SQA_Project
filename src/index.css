@@ -148,3 +148,7 @@ a:hover {
 .nav-disable:hover {
   text-decoration: none !important;
 }
+
+button {
+  padding: 2px 4px;
+}
