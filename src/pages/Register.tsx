@@ -56,6 +56,8 @@ function Register() {
       label: sssy.subject.name,
       value: sssy.subject.id,
     }));
+    console.log(subjectForm);
+    
   return (
     <div style={{ display: 'flex', gap: 8, marginTop: 26, flexWrap: 'wrap' }}>
       <Main>
@@ -91,6 +93,7 @@ function Register() {
                 <button
                   id='submit-subject-form'
                   disabled={
+                    semesterSchoolYears.length === 0 ||
                     isNaN(subjectForm.idStudentDepartment) ||
                     isNaN(subjectForm.idSemesterSchoolYear)
                   }

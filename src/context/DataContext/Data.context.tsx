@@ -11,35 +11,12 @@ import axios from 'axios';
 import { IData, initData, ISelectedSectionClass } from './Data';
 import { ISectionClass } from '../models/SectionClass';
 
-const setSelectedSectionClassesLocal = (sc: ISelectedSectionClass[]) => {
-  return localStorage.setItem(
-    `selectedSectionClass`,
-    JSON.stringify(
-      sc.map((s) => ({
-        ...s,
-        sectionClass: { ...s.sectionClass, schedules: undefined },
-      }))
-    )
-  );
-};
-
-const getSelectedSectionClassesLocal = (): ISelectedSectionClass[] | null => {
-  const sc = localStorage.getItem(`selectedSectionClass`);
-  if (!sc) return null;
-  return JSON.parse(sc);
-};
-
 export const DataContext = createContext<IData>(initData);
 function Data({ children }: any) {
-  const [isInit, setIsInit] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [_selectedSectionClasses, setSelectedSectionClasses] = useState<
+  const [selectedSectionClasses, setSelectedSectionClasses] = useState<
     ISelectedSectionClass[]
-  >(getSelectedSectionClassesLocal() ?? []);
-
-  const selectedSectionClasses = (() => {
-    return getSelectedSectionClassesLocal() || _selectedSectionClasses;
-  })();
+  >([]);
 
   // form
   const [subjectSemesterSchoolYearForm, setSubjectSemesterSchoolYearForm] =
@@ -93,32 +70,15 @@ function Data({ children }: any) {
   }, []);
 
   useEffect(() => {
-    const existedSc = getSelectedSectionClassesLocal() ?? [];
-    const newSc: ISelectedSectionClass[] = [
-      ...registerOfStudent.map((r) => ({
-        sectionClass: r.sectionClass,
-        idStudentDepartment: subjectSemesterSchoolYearForm.idStudentDepartment,
-      })),
-    ];
-
-    const duplicatedSc = [...newSc, ...existedSc];
-
-    const sc: ISelectedSectionClass[] = [...newSc];
-    // console.log({ existedSc, newSc });
-
-    duplicatedSc.forEach((ds) => {
-      if (
-        sc.findIndex((s) => s.sectionClass.id === ds.sectionClass.id) === -1
-      ) {
-        sc.push(ds);
-      }
+    setSelectedSectionClasses(() => {
+      return [
+        ...registerOfStudent.map((r) => ({
+          sectionClass: r.sectionClass,
+          idStudentDepartment:
+            subjectSemesterSchoolYearForm.idStudentDepartment,
+        })),
+      ];
     });
-
-    if (!isInit) {
-      setIsInit((_) => false);
-      setSelectedSectionClassesLocal(sc);
-      setSelectedSectionClasses(sc);
-    }
   }, [registerOfStudent, subjectSemesterSchoolYearForm]);
 
   // const { schedules, refetch: refetchGetSchedulesOfSectionClasses } =
@@ -134,7 +94,7 @@ function Data({ children }: any) {
   const handleSelectSectionClass = useCallback(
     (sectionClass: ISectionClass) => {
       setSelectedSectionClasses((prev) => {
-        const sc = [
+        return [
           ...prev.filter(
             (s) =>
               s.sectionClass.subjectSemester.id !==
@@ -146,8 +106,6 @@ function Data({ children }: any) {
             sectionClass,
           },
         ];
-        setSelectedSectionClassesLocal(sc);
-        return sc;
       });
     },
     [subjectSemesterSchoolYearForm]
@@ -155,11 +113,9 @@ function Data({ children }: any) {
 
   const handleDeselectSectionClass = useCallback(
     (sectionClass: ISectionClass) => {
-      setSelectedSectionClasses((prev) => {
-        const sc = prev.filter((s) => s.sectionClass.id !== sectionClass.id);
-        setSelectedSectionClassesLocal(sc);
-        return sc;
-      });
+      setSelectedSectionClasses((prev) =>
+        prev.filter((s) => s.sectionClass.id !== sectionClass.id)
+      );
     },
     [subjectSemesterSchoolYearForm]
   );
