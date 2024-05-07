@@ -25,6 +25,7 @@ import lombok.Setter;
                 }
         )
 )
+@Table(name = "tblkihoc")
 public class SemesterSchoolYear {
     @Id
     private Integer id;

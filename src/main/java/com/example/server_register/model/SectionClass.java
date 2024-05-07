@@ -42,6 +42,7 @@ import java.util.List;
                 }
         )
 )
+@Table(name = "tbllophocphan")
 public class SectionClass {
     @Id
     private Integer id;

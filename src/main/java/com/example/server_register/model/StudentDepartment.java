@@ -24,6 +24,7 @@ import lombok.Setter;
                 }
         )
 )
+@Table(name = "tblsinhvienkhoa")
 public class StudentDepartment {
     @Id
     private Integer id;

@@ -157,40 +157,10 @@ class SaveRegisterOfStudentTest {
             throw new RuntimeException(exception);
         }
     }
-//
-//    @Test
-//    void saveRegistrationOfStudent_StandardTest4(){
-////        dang ki 1LHP, khac MH voi dang ki cu,
-////        dang ki cu cung chi co 1 LHP ( xoa dang ki cu, them dang ki moi)
-//    }
-//
-//    @Test
-//    void saveRegistrationOfStudent_StandardTest5(){
-////        dang ki nhieu LHP, dang ki cu it LHP hon
-////        phu thuoc het vao dang ki moi, ke ca dang ki cu co nhieu
-////        nhung dang ki moi co it thi van phai theo dang ki moi
-//    }
-//
-//    @Test
-//    void saveRegistrationOfStudent_StandardTest6(){
-////        dang ki nhieu LHP, dang ki cu nhieu LHP hon
-////        phu thuoc het vao dang ki moi, ke ca dang ki cu co nhieu
-////        nhung dang ki moi co it thi van phai theo dang ki moi
-//    }
-//
-//    @Test
-//    void saveRegistrationOfStudent_ExceptionTest1(){
-////        danh sach dang ki trung voi danh sach da dang ki
-//    }
-//
-//    @Test
-//    void saveRegistrationOfStudent_ExceptionTest2(){
-////        danh sach dang ki null hoac rong
-//    }
 
     @Test
     @Rollback
-    void saveRegistrationOfStudent_ExceptionTest3(){
+    void saveRegistrationOfStudent_ExceptionTest1(){
 //        so tin chi >=19
 
         try{
@@ -230,7 +200,7 @@ class SaveRegisterOfStudentTest {
 
     @Test
     @Rollback
-    void saveRegistrationOfStudent_ExceptionTest4(){
+    void saveRegistrationOfStudent_ExceptionTest2(){
 //        so tin chi <= 13
         try{
             List<RegisterDto> registers = new ArrayList<>();
