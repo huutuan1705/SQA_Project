@@ -31,6 +31,7 @@ import java.time.LocalDate;
         )
 )
 @Entity
+@Table(name = "tblthanhvien")
 public class Member {
 
     @Id
@@ -61,5 +62,10 @@ public class Member {
     public Member(Integer idStudent, String studentName) {
         this.id = idStudent;
         this.name = studentName;
+    }
+
+    public Member(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }

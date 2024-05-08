@@ -23,12 +23,4 @@ public class MemberRepo {
                 .setParameter("pwd", member.getPassword());
         return (Member) query.getSingleResult();
     }
-
-    public Member findByUsername(String username) {
-
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("findByUsername", "MemberMapper")
-                .registerStoredProcedureParameter("usn", String.class, ParameterMode.IN)
-                .setParameter("usn", username);
-        return (Member) query.getSingleResult();
-    }
 }
